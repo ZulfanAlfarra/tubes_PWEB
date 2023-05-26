@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ReactToPrint from "react-to-print"
 import { AuthContext } from "../../helpers/AuthContext";
+import NavbarZakat from './NavbarZakat'
 
 const Bayar = () => {
   const { authState } = useContext(AuthContext);
@@ -43,6 +44,7 @@ const Bayar = () => {
   const [jmlBayar, setJmlBayar] = useState();
   const [beras, setBeras] = useState();
   const [uang, setUang] = useState();
+  const [idMuzakki, setIdMuzakki] = useState()
 
   const submitBayar = () => {
     if (nama !== '' && tanggungan !== null && jenis !== '' && jmlBayar !== null) {
@@ -52,7 +54,8 @@ const Bayar = () => {
         jenis_bayar: jenis,
         jmlDibayar: jmlBayar,
         beras: beras,
-        uang: uang
+        uang: uang,
+        MuzakkiId: idMuzakki
       }, {
         headers: {
           accessToken: sessionStorage.getItem("accessToken")
@@ -81,7 +84,11 @@ const Bayar = () => {
     setSelectedValue(e)
     setTanggungan(parseInt(e.jmlTanggungan))
     setNama(e.nama)
+    setIdMuzakki(e.id)
+
   }
+
+
 
   console.log(datasOfMuzakki)
 
@@ -90,8 +97,7 @@ const Bayar = () => {
 
   return (
     <div className='min-h-screen bg-[#F9F7F7] w-full max-w-[1240px] mx-auto'>
-      <p className='uppercase font-bold text-3xl text-center mt-8'>pengumpulan zakat</p>
-
+      <NavbarZakat />
       <form className={!authState ? 'hidden' : 'w-full max-w-md mx-auto px-8 pt-6 pb-8 shadow-md mt-5'}>
         <p className='font-bold uppercase text-center text-xl mt-0 mb-4 text-[#112D4E]'>Pembayaran Zakat</p>
         <div className='mb-4'>
@@ -113,20 +119,22 @@ const Bayar = () => {
         </div>
         <div className='mb-4'>
           <label for="jenisBayar" className='block text-gray-700 text-sm font-bold mb-2' >Jenis Pembayaran :</label>
-          <Select placeholder='Jenis Pembayaran' options={options} id='nama' onChange={(e) => setJenis(e.value)} />
+          <Select placeholder='Jenis Pembayaran' options={options} id='nama' onChange={(e) => {
+            setJenis(e.value)
+            if (e.value === 'uang') {
+              setJmlBayar(tanggungan * 30000)
+              setBeras(0)
+              setUang(tanggungan * 30000)
+            } else if (e.value === 'beras') {
+              setJmlBayar(tanggungan * 2.5)
+              setBeras(tanggungan * 2.5)
+              setUang(0)
+            }
+          }} />
         </div>
         <div className='mb-4'>
           <label className='block text-gray-700 text-sm font-bold mb-2' for='jumlahDibayar' >Jumlah Dibayar : </label>
-          <input onChange={(e) => {
-            setJmlBayar(e.target.value)
-            if (jenis === 'uang') {
-              setUang(e.target.value)
-              setBeras(0)
-            } else {
-              setBeras(e.target.value)
-              setUang(0)
-            }
-          }} id='jumlahDibayar' placeholder='Jumlah' type='number' step='0.01' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' />
+          <input value={jmlBayar} id='jumlahDibayar' placeholder='Jumlah' type='number' step='0.01' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' />
         </div>
         <div className='text-right'>
           <button onClick={submitBayar} className='bg-[#3F72AF] hover:bg-[#DBE2EF] hover:text-[#3F72AF] mt-5 text-white font-bold py-2 px-4 rounded-full'>Bayar</button>
@@ -136,13 +144,14 @@ const Bayar = () => {
       <div className='mt-16'>
         <ReactToPrint
           trigger={() => {
-            return <button className='bg-[]'>print</button>
+            return <button className='bg-[#112D4E] py-2 px-4 text-white rounded-2xl ml-12 hover:shadow-slate-800'>print</button>
           }}
           content={() => componentRef.current}
         />
       </div>
-      <div ref={componentRef} className='w-full overflow-hidden border rounded-lg shadow-md mb-16'>
-        <table className='min-w-full mx-auto'>
+      <div ref={componentRef} className='w-full overflow-hidden rounded-lg mb-16'>
+        <p className='uppercase font-bold text-2xl text-center my-5'>pengumpulan zakat</p>
+        <table className='min-w-full mx-auto mb-6 shadow-lg table-auto'>
           <thead className='bg-[#3F72AF]'>
             <th scope='col' className='px-6 py-3 text-xs font-bold text-left uppercase'>no</th>
             <th scope='col' className='px-6 py-3 text-xs font-bold text-left uppercase'>nama</th>
@@ -157,14 +166,14 @@ const Bayar = () => {
             {dataZakat.map((e, index) => {
               return (
                 <tr>
-                  <td className='text-center'>{index + 1}</td>
-                  <td className=''>{e.nama_kk}</td>
-                  <td className='text-center'>{e.jml_tanggungan}</td>
-                  <td className='text-center'>{e.jenis_bayar}</td>
-                  <td className='text-center'>{e.jmlDibayar}</td>
-                  <td className='text-center'>{e.beras}</td>
-                  <td className='text-center'>{e.uang}</td>
-                  <td className={!authState ? 'hidden' : 'flex justify-evenly'}><span onClick={() => {
+                  <td className='text-center py-1'>{index + 1}</td>
+                  <td className='py-1'>{e.nama_kk}</td>
+                  <td className='text-center py-1'>{e.jml_tanggungan}</td>
+                  <td className='text-center py-1'>{e.jenis_bayar}</td>
+                  <td className='text-center py-1'>{e.jmlDibayar}</td>
+                  <td className='text-center py-1'>{e.beras}</td>
+                  <td className='text-center py-1'>{e.uang}</td>
+                  <td className={!authState ? 'hidden' : 'flex justify-evenly py-1'}><span onClick={() => {
                     deleteBayar(e.id)
                   }}>{<DeleteIcon fontSize='medium' className='text-red-600 cursor-pointer' />}</span>  {<EditIcon fontSize='medium' className='cursor-pointer' />}</td>
                 </tr>

@@ -23,17 +23,24 @@ const Zakat = () => {
           </div>
         </div>
         <div class="max-w-sm rounded-full overflow-hidden shadow-lg bg-[#3F72AF] w-full sm:w-1/2 md:w-1/3 lg:w-1/4 cursor-pointer hover:shadow-2xl hover:-translate-y-2 m-4">
-          <div class="px-6 py-4 text-center">
-            <div class="font-bold text-xl mb-2" onClick={() => {
-              navigate('/kegiatan/zakat/mustahik')
-            }}>Data Mustahik</div>
-          </div>
-        </div>
-        <div class="max-w-sm rounded-full overflow-hidden shadow-lg bg-[#3F72AF] w-full sm:w-1/2 md:w-1/3 lg:w-1/4 cursor-pointer hover:shadow-2xl hover:-translate-y-2 m-4">
           <div class="px-6 py-4 text-center" onClick={() => {
             navigate('/kegiatan/zakat/bayar')
           }} >
             <div class="font-bold text-xl mb-2">Pengumpulan Zakat</div>
+          </div>
+        </div>
+        <div class="max-w-sm rounded-full overflow-hidden shadow-lg bg-[#3F72AF] w-full sm:w-1/2 md:w-1/3 lg:w-1/4 cursor-pointer hover:shadow-2xl hover:-translate-y-2 m-4">
+          <div class="px-6 py-4 text-center">
+            <div class="font-bold text-xl mb-2" onClick={() => {
+              navigate('/kegiatan/zakat/kat')
+            }}>Kategori Mustahik</div>
+          </div>
+        </div>
+        <div class="max-w-sm rounded-full overflow-hidden shadow-lg bg-[#3F72AF] w-full sm:w-1/2 md:w-1/3 lg:w-1/4 cursor-pointer hover:shadow-2xl hover:-translate-y-2 m-4">
+          <div class="px-6 py-4 text-center">
+            <div class="font-bold text-xl mb-2" onClick={() => {
+              navigate('/kegiatan/zakat/distribusi')
+            }}>Distribusi zakat</div>
           </div>
         </div>
       </div>

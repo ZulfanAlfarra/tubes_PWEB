@@ -12,4 +12,14 @@ router.get("/", async (req, res) => {
 //   await Muzakki.create(muzakki);
 // });
 
+router.put("/update", async (req, res) => {
+  const kat = req.body;
+  await KategoriMustahik.update(
+    {
+      jml_hak: kat.jml_hak,
+    },
+    { where: { id: kat.id } }
+  );
+});
+
 module.exports = router;

@@ -12,8 +12,10 @@ import Muzakki from "./component/Zakat/Muzakki";
 import Laporan from "./component/Zakat/Laporan";
 import { AuthContext } from "./helpers/AuthContext";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Mustahik from "./component/Zakat/Mustahik";
+import MuzakkiUpdate from "./component/update/MuzakkiUpdate";
+import DistribusiUpdate from "./component/update/DistribusiUpdate";
+import KatMustahik from "./component/Zakat/KatMustahik";
 
 function App() {
   const [authState, setAuthState] = useState(false);
@@ -36,7 +38,7 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-[#F9F7F7]">
+    <div className="bg-[rgb(249,247,247)]">
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
           <Navbar />
@@ -48,7 +50,16 @@ function App() {
             <Route path="/kegiatan/zakat" element={<Zakat />} />
             <Route path="/kegiatan/zakat/bayar" element={<Bayar />} />
             <Route path="/kegiatan/zakat/muzakki" element={<Muzakki />} />
-            <Route path="/kegiatan/zakat/mustahik" element={<Mustahik />} />
+            <Route path="/kegiatan/zakat/kat" element={<KatMustahik />} />
+            <Route
+              path="/kegiatan/zakat/muzakki/update/:id"
+              element={<MuzakkiUpdate />}
+            />
+            <Route path="/kegiatan/zakat/distribusi" element={<Mustahik />} />
+            <Route
+              path="/kegiatan/zakat/distribusi/update/:id"
+              element={<DistribusiUpdate />}
+            />
             <Route path="/kegiatan/zakat/laporan" element={<Laporan />} />
           </Routes>
           <Footer />

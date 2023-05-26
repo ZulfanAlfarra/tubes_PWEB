@@ -12,6 +12,14 @@ module.exports = (Sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       allowNull: true,
     },
+    beras: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
+    uang: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   });
 
   return Mustahik;

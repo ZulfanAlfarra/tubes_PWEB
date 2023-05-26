@@ -1,5 +1,8 @@
 import React from 'react'
 import zakat from '../image/zakat.jpeg'
+import qurban from '../image/qurban2.jpeg'
+import pengajian from '../image/pengajian.jpeg'
+import uang from '../image/uang.jpg'
 import { useNavigate } from 'react-router-dom'
 
 const Kegiatan = () => {
@@ -21,7 +24,7 @@ const Kegiatan = () => {
         <div class="cursor-not-allowed max-w-sm m-4 rounded overflow-hidden shadow-lg w-full sm:w-1/2 md:w-1/3 lg:w-1/4 hover:shadow-2xl hover:-translate-y-2 hover:blur-sm " onClick={() => {
           navigate('#')
         }} >
-          <img className='w-full' src={zakat} />
+          <img className='w-full' src={qurban} />
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2">Qurban</div>
             <p class="text-gray-700 text-base">
@@ -32,7 +35,7 @@ const Kegiatan = () => {
         <div class="max-w-sm m-4 rounded overflow-hidden shadow-lg w-full sm:w-1/2 md:w-1/3 lg:w-1/4 cursor-not-allowed hover:shadow-2xl hover:-translate-y-2 hover:blur-sm " onClick={() => {
           navigate('#')
         }} >
-          <img className='w-full' src={zakat} />
+          <img className='w-full' src={pengajian} />
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2">Pengajian Mingguan</div>
             <p class="text-gray-700 text-base">
@@ -43,11 +46,11 @@ const Kegiatan = () => {
         <div class="max-w-sm m-4 rounded overflow-hidden shadow-lg w-full sm:w-1/2 md:w-1/3 lg:w-1/4 cursor-not-allowed hover:shadow-2xl hover:-translate-y-2 hover:blur-sm " onClick={() => {
           navigate('#')
         }} >
-          <img className='w-full' src={zakat} />
+          <img className='w-full' src={uang} />
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2">Keuangan</div>
             <p class="text-gray-700 text-base">
-              Zakat fitrah adalah zakat yang diwajibkan atas setiap jiwa baik lelaki dan perempuan muslim yang dilakukan pada bulan Ramadan hingga menjelang salat Idul Fitri.
+              Laporan keuangan masjid al-ihsan
             </p>
           </div>
         </div>

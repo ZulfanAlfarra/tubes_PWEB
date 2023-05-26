@@ -25,4 +25,16 @@ router.delete("/:id", async (req, res) => {
   res.json("berhasil hapus");
 });
 
+router.delete("/delete/:id", async (req, res) => {
+  const id = req.params.id;
+
+  await BayarZakat.destroy({
+    where: {
+      MuzakkiId: id,
+    },
+  });
+
+  res.json("berhasil hapus");
+});
+
 module.exports = router;
